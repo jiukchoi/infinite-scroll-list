@@ -1,21 +1,43 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { Component } from 'react';
 import InfiniteScrollListUI from './InfiniteScrollList.presenter';
 
-const InfiniteScrollList = () => {
-  const [item, setItem] = useState([]);
-
-  const getItem = async () => {
-    const { data } = await axios.get('https://jsonplaceholder.typicode.com/comments?_page=1&_limit=10');
-
-    setItem(data);
+class InfiniteScrollList extends Component {
+  state = {
+    item: [],
+    itemPage: 1,
   };
 
-  useEffect(() => {
-    getItem();
-  }, []);
+  getItem = async () => {
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/comments?_page=${this.state.itemPage}&_limit=10`);
 
-  return <InfiniteScrollListUI item={item} />;
+    this.setState(prev => ({
+      item: [...prev.item, ...data]
+    }));
+  };
+
+  infiniteScroll = () => {
+    if (window.innerHeight + window.scrollY === document.documentElement.scrollHeight) {
+      this.setState({
+        itemPage: this.state.itemPage + 1,
+      });
+    };
+  };
+
+  componentDidMount() {
+    this.getItem();
+    window.addEventListener('scroll', this.infiniteScroll);
+  };
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.itemPage !== prevState.itemPage) {
+      this.getItem();
+    };
+  };
+
+  render() {
+    return <InfiniteScrollListUI item={this.state.item} />
+  };
 };
 
 export default InfiniteScrollList;
