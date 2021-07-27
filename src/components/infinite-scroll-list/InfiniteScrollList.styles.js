@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
 `;
 export const Container = styled.div`
   width: 500px;
-  height: 193px;
   background-color: #F8F9FA;
   border: 0.5px solid rgba(206, 212, 218, 0.5);
   border-radius: 20px;
