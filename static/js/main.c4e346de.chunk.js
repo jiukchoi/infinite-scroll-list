@@ -1,0 +1,2 @@
+(this["webpackJsonpinfinite-scroll-list"]=this["webpackJsonpinfinite-scroll-list"]||[]).push([[0],{9:function(e,t,n){"use strict";n.r(t);n(1);var i=n(3),r=n.n(i),s=n(0);var c=function(){return Object(s.jsx)(s.Fragment,{children:Object(s.jsx)("div",{children:"hello world!"})})};r.a.render(Object(s.jsx)(c,{}),document.getElementById("root"))}},[[9,1,2]]]);
+//# sourceMappingURL=main.c4e346de.chunk.js.map
